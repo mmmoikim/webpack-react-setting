@@ -2,7 +2,11 @@
 
 - 리액트 셋팅 프로젝트입니다.
 
-## install webpack & plugins
+## basic webpack setting
+
+- 웹팩 설정
+
+### install webpack & plugins
 
 ```bash
 npm init
@@ -13,7 +17,7 @@ npm install webpack-merge ## for config file merget
 npm install html-webpack-plugin ## html template
 ```
 
-## setting build script package.json
+### setting build script package.json
 
 ```js
   "scripts": {
@@ -24,7 +28,7 @@ npm install html-webpack-plugin ## html template
   }
 ```
 
-## make directory
+### make directory
 
 ```bash
 .
@@ -41,7 +45,7 @@ npm install html-webpack-plugin ## html template
 └─ package.json
 ```
 
-## webpack.config.js
+### webpack.config.js
 
 - 개발서버랑 빌드용 컨피그 나눠서 관리
 - common.js는 둘다 사용하는 config
@@ -62,7 +66,7 @@ module.exports = (env, options) => {
 }
 ```
 
-## webpack.config.common.js
+### webpack.config.common.js
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -89,7 +93,7 @@ module.exports = {
 }
 ```
 
-## index.html
+### index.html
 
 - html-webpack-plugin을 써서 이 html template으로 빌드 할 꺼임.
 
@@ -110,7 +114,7 @@ module.exports = {
 </html>
 ```
 
-## webpack.config.prod.js
+### webpack.config.prod.js
 
 ```js
 const path = require('path');
@@ -123,7 +127,8 @@ module.exports = {
 }
 ```
 
-## webpack.config.dev.js
+### webpack.config.dev.js
+
 ```js
 const webpack = require('webpack');
 
@@ -161,7 +166,7 @@ module.exports = {
 }
 ```
 
-## src/index.js
+### src/index.js
 
 - 엔트리
 
@@ -175,16 +180,79 @@ function component() {
 document.body.appendChild(component());
 ```
 
-## .gitigore
+### .gitigore
 
-```
+```bash
 /node_modules
 /dist
 ```
 
-## build !
+### build
 
-```
+```bash
 npm run build
 npm run dev
+```
+
+## webpack Plugins
+
+### clean-webpack-plugin
+
+- clean the /dist folder before each build
+- https://webpack.js.org/guides/output-management/
+
+``` js
+const {
+    CleanWebpackPlugin
+} = require('clean-webpack-plugin');
+
+    plugins: [
+        new CleanWebpackPlugin()
+    ]
+```
+
+## babel setting
+
+### install babel
+
+```bash
+npm install @babel/core
+npm install @babel/plugin-syntax-dynamic-import
+npm install @babel/polyfill
+npm install @babel/preset-env
+npm install babel-loader
+```
+
+- @babel/core : Babel compiler core.
+- @babel/plugin-syntax-dynamic-import : Allow parsing of import()
+- @babel/polyfill : This will emulate a full ES2015+ environment (no < Stage 4 proposals) and is intended to be used in an application rather than a library/tool.
+- @babel/preset-env : allows you to use the latest JavaScript without needing to micromanage which syntax transforms
+- babel-loader :  allows transpiling JavaScript files using Babel and webpack.
+
+### create babellc file
+
+```js
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "modules": false
+            }
+        ]
+    ],
+    "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+```
+
+### set webpack module
+
+```js
+{
+        test: /\.js/,
+        exclude: /(node_modules)/,
+        use: [{
+            loader: 'babel-loader'
+        }]
+    }
 ```

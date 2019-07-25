@@ -5,6 +5,8 @@ const ROOT = path.resolve(__dirname, '../');
 const APP_DIR = path.resolve(ROOT, 'src');
 const BUILD_DIR = path.resolve(ROOT, 'dist');
 
+const moduleConfig = require('./module.js');
+
 module.exports = {
     entry: {
         app: [APP_DIR + '/index.js']
@@ -13,6 +15,7 @@ module.exports = {
         filename: '[name].bundle.js',
         path: BUILD_DIR
     },
+    module: moduleConfig,
     plugins: [
         //creation of HTML files to serve your webpack bundles
         new HtmlWebpackPlugin({

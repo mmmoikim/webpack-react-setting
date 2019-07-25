@@ -1,5 +1,5 @@
 function component() {
-    var element = document.createElement('pre');
+    let element = document.createElement('pre');
     element.innerHTML = 'HELLO !'
     return element;
 }
