@@ -1,7 +1,10 @@
-function component() {
-    let element = document.createElement('pre');
-    element.innerHTML = 'HELLO !'
-    return element;
-}
+import React from 'react';
+import { render } from 'react-dom';
 
-document.body.appendChild(component());
+const App = () => (
+  <div>
+    <p>hello</p>
+  </div>
+);
+
+render(<App />, document.getElementById('app'));

@@ -256,3 +256,41 @@ npm install babel-loader
         }]
     }
 ```
+
+## react setting
+
+### install npm module
+
+```bash
+npm install react
+npm install react-dom
+npm install react-router-dom
+npm install @babel/preset-react
+```
+
+### add babel preset
+
+```js
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            "@babel/preset-react",
+            {
+                "modules": false
+            }
+        ]
+    ],
+    "plugins": ["@babel/plugin-syntax-dynamic-import"]
+}
+```
+
+### edit webpack config module
+
+```js
+{
+        test: /\.(js|jsx)$/,
+        exclude: "/node_modules",
+        use: ['babel-loader'],
+}
+```
