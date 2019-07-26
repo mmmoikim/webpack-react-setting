@@ -233,14 +233,7 @@ npm install babel-loader
 
 ```js
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "modules": false
-            }
-        ]
-    ],
+    "presets": ["@babel/preset-env"],
     "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
 ```
@@ -271,18 +264,10 @@ npm install @babel/preset-react
 ### add babel preset
 
 ```js
-{
-    "presets": [
-        [
-            "@babel/preset-env",
-            "@babel/preset-react",
-            {
-                "modules": false
-            }
-        ]
-    ],
-    "plugins": ["@babel/plugin-syntax-dynamic-import"]
-}
+  {
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
+      "plugins": ["@babel/plugin-syntax-dynamic-import"]
+  }
 ```
 
 ### edit webpack config module
@@ -293,4 +278,19 @@ npm install @babel/preset-react
         exclude: "/node_modules",
         use: ['babel-loader'],
 }
+```
+
+## src/index.js
+```js
+import React from 'react';
+import { render } from 'react-dom';
+
+const App = () => (
+  <div>
+    <p>hello</p>
+  </div>
+);
+
+render(<App />, document.getElementById('app'));
+
 ```
