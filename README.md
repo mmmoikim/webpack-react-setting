@@ -294,3 +294,195 @@ const App = () => (
 render(<App />, document.getElementById('app'));
 
 ```
+
+## react Router setting
+
+- path.js
+```js
+import React from 'react';
+
+const path = [
+  {
+    path: "/",
+    exact: true,
+    component: () => <h2>Home</h2>
+  }, {
+    path: "/users",
+    component: () => <h2>users</h2>
+  }, {
+    path: "/about",
+    component: () => <h2>about</h2>
+  }, {
+    path: "/will-match",
+    component: () => <h2>will-match</h2>
+  }
+];
+
+export default path;
+
+```
+
+- Menu.js
+
+```js
+import React from 'react';
+import {Link} from "react-router-dom";
+
+class Menu extends React.Component {
+  render() {
+    return (<nav>
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about/">About</Link>
+        </li>
+        <li>
+          <Link to="/users/">Users</Link>
+        </li>
+        <li>
+          <Link to="/will-match/">Will Match</Link>
+        </li>
+        <li>
+          <Link to="/old-match/">Old Match, to be redirected</Link>
+        </li>
+        <li>
+          <Link to="/nomatch/">nomatch</Link>
+        </li>
+      </ul>
+    </nav>);
+  }
+}
+
+export default Menu;
+
+```
+
+- RoutePage.js
+
+```js
+import React from 'react';
+import {Route, Switch, Redirect} from "react-router-dom";
+
+import path from "./path"
+
+class RoutePage extends React.Component {
+  render() {
+    return (<Switch>
+      {
+        path.map((obj, index) => {\
+          return <Route key={index} path={obj.path} exact={obj.exact} component={obj.component}/>
+        })
+      }
+      <Redirect from="/old-match" to="/will-match"/>
+      <Route component={NoMatch}/>
+    </Switch>);
+  }
+}
+
+function NoMatch() {
+  return <h2>404</h2>;
+}
+
+export default RoutePage;
+```
+
+- App.js
+
+```js
+import React from 'react';
+import Menu from "./Menu.js"
+import RoutePage from "./RoutePage.js"
+import {BrowserRouter as Router} from "react-router-dom";
+
+class App extends React.Component {
+  render() {
+    return (<div>
+      <Router>
+        <Menu/>
+        <RoutePage/>
+      </Router>
+    </div>)
+  }
+}
+
+export default App;
+
+```
+
+
+## alias setting
+- 절대경로에 호칭 붙이기
+- webpack.config
+```js
+module.exports = {
+  resolve: {
+    alias: {
+      'Src': APP_DIR,
+    },
+    extensions: ['*', '.js', '.json']
+  }
+}
+
+```
+
+## css style loader setting
+- style-loader : Adds CSS to the DOM by injecting a style tag, It's recommended to combine style-loader with the css-loader
+- css-loader : The css-loader interprets import and url() like import/require() and will resolve them.
+
+```js
+{
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    {
+      loader: "css-loader",
+      options: {
+        modules: {
+          localIdentName: '[path][name]__[local]--[hash:base64:5]', //모듈화 했을때 네이밍
+          context: APP_DIR,
+        }
+      }
+    }
+  ]
+}
+```
+
+## postcss setting
+- postcss-preset-env : lets you convert modern CSS into something most browsers can understand
+
+```bash
+npm install postcss-loader
+npm install postcss-preset-env
+```
+
+```js
+{
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    {
+      loader: "css-loader",
+      options: {
+        importLoaders: 1, //The option importLoaders allows you to configure how many loaders before css-loader should be applied to @imported resources.
+        modules: {
+          localIdentName: '[path][name]__[local]--[hash:base64:5]',
+          context: APP_DIR,
+        }
+      }
+    },
+    'postcss-loader'
+  ]
+}
+```
+
+- create postcs.config.js file
+
+```js
+module.exports = ({ file, options, env }) => ({
+   plugins: {
+     'postcss-preset-env': {}
+   }
+})
+```

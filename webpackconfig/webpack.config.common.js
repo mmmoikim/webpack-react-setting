@@ -8,18 +8,25 @@ const BUILD_DIR = path.resolve(ROOT, 'dist');
 const moduleConfig = require('./module.js');
 
 module.exports = {
-    entry: {
-        app: [APP_DIR + '/index.js']
+  entry: {
+    app: [APP_DIR + '/index.js']
+  },
+  output: {
+    filename: '[name].bundle.js',
+    path: BUILD_DIR
+  },
+  module: moduleConfig,
+  resolve: {
+    alias: {
+      'Src': APP_DIR,
+      'Style': APP_DIR + '/assets/style'
     },
-    output: {
-        filename: '[name].bundle.js',
-        path: BUILD_DIR
-    },
-    module: moduleConfig,
-    plugins: [
-        //creation of HTML files to serve your webpack bundles
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'index.html')
-        })
-    ]
+    extensions: ['*', '.js', '.json']
+  },
+  plugins: [
+    //creation of HTML files to serve your webpack bundles
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'index.html')
+    })
+  ]
 }
