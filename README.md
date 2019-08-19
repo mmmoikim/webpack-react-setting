@@ -486,3 +486,28 @@ module.exports = ({ file, options, env }) => ({
    }
 })
 ```
+
+
+### mobx setting
+```
+npm install mobx
+npm install mobx-react
+npm install mobx-react-devtools //버전문제있음 확인해야됨
+npm install @babel/plugin-proposal-decorators
+npm install @babel/plugin-syntax-dynamic-import
+```
+-
+
+- .bablelrc 플러그인 추가
+```
+{
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", {
+      "legacy": true
+    }],
+    ["@babel/plugin-proposal-class-properties", {
+      "loose": true
+    }]
+  ]
+}
+```
