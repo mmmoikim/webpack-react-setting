@@ -3,8 +3,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 
 import path from "Src/path"
 
-class RoutePage extends React.Component {
-  render() {
+const RoutePage = () => {
     return (<Switch>
       {
         path.map((obj, index) => {
@@ -14,7 +13,6 @@ class RoutePage extends React.Component {
       <Redirect from="/old-match" to="/will-match"/>
       <Route component={NoMatch}/>
     </Switch>);
-  }
 }
 
 function NoMatch() {

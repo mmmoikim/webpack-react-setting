@@ -1,6 +1,7 @@
 import React from 'react';
-import About from 'Src/Container/About';
-import User from 'Src/Container/User';
+import About from 'Src/Container/About/About';
+import User from 'Src/Container/User/User';
+import SuperMarket from 'Src/Container/SuperMarket/SuperMarket';
 
 const path = [
   {
@@ -8,7 +9,7 @@ const path = [
     exact: true,
     component: () => <h2>Home</h2>
   }, {
-    path: "/users",
+    path: "/user",
     component: User
   }, {
     path: "/about",
@@ -16,6 +17,9 @@ const path = [
   }, {
     path: "/will-match",
     component: () => <h2>will-match</h2>
+  }, {
+    path: "/superMarket",
+    component: SuperMarket
   }
 ];
 

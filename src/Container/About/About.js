@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from "Style/about.css";
+import style from"./about.css";
 
 class About extends React.Component {
   render() {
-    return (<h2 className={styles.test}>About</h2>)
+    return (<h2 className={style.test}>About</h2>)
   }
 }
 

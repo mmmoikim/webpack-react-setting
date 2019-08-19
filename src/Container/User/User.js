@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "Style/user.css";
+import styles from "./user.css";
 
 class User extends React.Component {
   render() {
