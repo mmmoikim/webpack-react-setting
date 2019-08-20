@@ -1,4 +1,5 @@
-module.exports = { login: 'octocat',
+module.exports = {
+  login: 'octocat',
   id: 583231,
   avatar_url: 'https://avatars0.githubusercontent.com/u/583231?v=3',
   gravatar_id: '',
@@ -27,4 +28,5 @@ module.exports = { login: 'octocat',
   followers: 1840,
   following: 6,
   created_at: '2011-01-25T18:44:36Z',
-  updated_at: '2017-07-06T21:26:58Z' };
+  updated_at: '2017-07-06T21:26:58Z'
+};

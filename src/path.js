@@ -2,6 +2,7 @@ import React from 'react';
 import About from 'Src/Container/About/About';
 import User from 'Src/Container/User/User';
 import SuperMarket from 'Src/Container/SuperMarket/SuperMarket';
+import Profile from 'Src/Container/Profile/Profile';
 
 const path = [
   {
@@ -20,7 +21,10 @@ const path = [
   }, {
     path: "/superMarket",
     component: SuperMarket
-  }
+  },{
+    path: "/profile",
+    component: () => <Profile username="moi" name="김유경"/>
+  },
 ];
 
 export default path;

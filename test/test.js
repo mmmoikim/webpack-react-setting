@@ -4,6 +4,9 @@ const response = require('./response');
 const axios = require('axios');
 
 describe('Get User tests', () => {
+
+  let container;
+
   beforeEach(() => {
     nock('https://api.github.com')
       .get('/users/octocat')
