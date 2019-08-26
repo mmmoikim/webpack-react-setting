@@ -529,3 +529,183 @@ npm install axios
   "test": "mocha"
 }
 ```
+
+- example
+```js
+const expect = require('chai').expect;
+const nock = require('nock');
+const response = require('./response');
+const axios = require('axios');
+
+describe('Get User tests', () => {
+
+  let container;
+
+  beforeEach(() => {
+    nock('https://api.github.com')
+      .get('/users/octocat')
+      .reply(200, response);
+  });
+
+  it('Get a user by username', () => {
+    let getUser = (username) => {
+      return axios.get(`https://api.github.com/users/${username}`)
+        .then(res => res.data)
+        .catch(error => console.log(error));
+    };
+
+    return getUser('octocat')
+      .then(response => {
+        //expect an object back
+        expect(typeof response).to.equal('object');
+
+        //Test result of name, company and location for the response
+        expect(response.name).to.equal('The Octocat')
+        expect(response.company).to.equal('GitHub')
+        expect(response.location).to.equal('San Francisco')
+      });
+  });
+});
+
+```
+
+### react testing setting
+```bash
+npm install @testing-library/react
+npm install jest
+```
+
+- package.json script 추가
+```js
+"scripts": {
+  "jest-test": "jest -c jest.config.js --watch"
+}
+```
+
+- create jest config file, src/jest.config.js
+
+```js
+module.export = {
+  roots: ['<rootDir>/src'],
+  transform: {
+    '\\.(js|jsx)?$': 'babel-jest',
+  },
+  testMatch: ['<rootDir>/src/**/>(*.)test.{js, jsx}'], // finds test
+  moduleFileExtensions: ['js', 'jsx', 'json', 'node'],
+  testPathIgnorePatterns: ['/node_modules/', '/public/'],
+  setupFilesAfterEnv: [
+    'jest-dom/extend-expect',
+    '@testing-library/react/cleanup-after-each'
+  ] // setupFiles before the tests are ran
+};
+```
+
+- component test example
+- Profile.js
+```js
+import React from 'react';
+
+const Profile = ({ username, name }) => {
+  return (
+      <h1>Hi {username} {name}!</h1>
+  );
+};
+
+export default Profile;
+```
+- Profile.test.js
+```js
+import React from 'react'
+import {
+  render,
+  cleanup
+} from '@testing-library/react'
+import Profile from './Profile'
+
+afterEach(cleanup)
+
+describe('This will test MyComponent', () => {
+  test('renders message', () => {
+    const {getByText} = render( <Profile username="Alejandro" name="Roman" /> )
+
+    // as suggested by Giorgio Polvara a more idiomatic way:
+    expect(getByText('Hi Alejandro Roman!'))
+  })
+})
+```
+
+
+### setting code splitting
+
+- https://velog.io/@velopert/react-code-splitting
+
+- create src/withSplitting.js for HOC
+
+```js
+import React, { Component } from 'react';
+
+const withSplitting = getComponent => {
+  // 여기서 getComponent 는 () => import('./SplitMe') 의 형태로 함수가 전달되야합니다.
+  class WithSplitting extends Component {
+    state = {
+      Splitted: null
+    };
+
+    constructor(props) {
+      super(props);
+      getComponent().then(({ default: Splitted }) => {
+        this.setState({
+          Splitted
+        });
+      });
+    }
+
+    render() {
+      const { Splitted } = this.state;
+      if (!Splitted) {
+        return null;
+      }
+      return <Splitted {...this.props} />;
+    }
+  }
+
+  return WithSplitting;
+};
+
+export const About = withSplitting(() => import('Src/Container/About/About'));
+export const User = withSplitting(() => import('Src/Container/User/User'));
+export const SuperMarket = withSplitting(() => import('Src/Container/SuperMarket/SuperMarket'));
+export const Profile = withSplitting(() => import('Src/Container/Profile/Profile'));
+
+```
+
+- path.js
+```js
+import React from 'react';
+import {About, User, SuperMarket, Profile} from './withSplitting';
+
+const path = [
+  {
+    path: "/",
+    exact: true,
+    component: () => <h2>Home</h2>
+  }, {
+    path: "/user",
+    component: User
+  }, {
+    path: "/about",
+    component: About
+  }, {
+    path: "/will-match",
+    component: () => <h2>will-match</h2>
+  }, {
+    path: "/superMarket",
+    component: SuperMarket
+  }, {
+    path: "/profile",
+    component: () => <Profile username="moi" name="김유경"/>
+  }
+];
+
+export default path;
+```
