@@ -47,8 +47,11 @@ npm install html-webpack-plugin ## html template
 
 ### webpack.config.js
 
-- 개발서버랑 빌드용 컨피그 나눠서 관리
-- common.js는 둘다 사용하는 config
+- 개발서버, 빌드, 둘다 사용하는 config 나눠서 관리
+
+
+#### src/webpack.config.js
+- 개발은 common + dev, 운영은 common + prod 컨피그 머지함.
 
 ```js
 const merge = require('webpack-merge');
@@ -66,7 +69,8 @@ module.exports = (env, options) => {
 }
 ```
 
-### webpack.config.common.js
+#### webpack.config.common.js
+- HtmlWebpackPlugin : html 탬플렛 만들어서 빌드 하기 위해
 
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -96,6 +100,7 @@ module.exports = {
 ### index.html
 
 - html-webpack-plugin을 써서 이 html template으로 빌드 할 꺼임.
+- `template: path.resolve(__dirname, 'index.html')` 이 경로에 템플릿 만들어 놓음
 
 ```html
 <!DOCTYPE html>
@@ -114,7 +119,9 @@ module.exports = {
 </html>
 ```
 
-### webpack.config.prod.js
+#### webpack.config.prod.js
+
+- 빌드 셋팅은 추후에 진행
 
 ```js
 const path = require('path');
@@ -127,7 +134,9 @@ module.exports = {
 }
 ```
 
-### webpack.config.dev.js
+#### webpack.config.dev.js
+
+- HotModuleReplacementPlugin : 소스 변경 시 바로 적용
 
 ```js
 const webpack = require('webpack');
@@ -160,12 +169,6 @@ module.exports = {
 }
 ```
 
-```js
-module.exports = {
-    mode: 'production'
-}
-```
-
 ### src/index.js
 
 - 엔트리
@@ -180,14 +183,14 @@ function component() {
 document.body.appendChild(component());
 ```
 
-### .gitigore
+## .gitigore
 
 ```bash
 /node_modules
 /dist
 ```
 
-### build
+## build
 
 ```bash
 npm run build

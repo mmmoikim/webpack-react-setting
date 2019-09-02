@@ -10,21 +10,6 @@ const BUILD_DIR = path.resolve(ROOT, 'dist');
 
 module.exports = {
   mode: 'production',
-  optimization: {
-    splitChunks: {
-      // include all types of chunks
-      chunks: 'all'
-    },
-    namedModules: true,
-    moduleIds: 'hashed',
-    minimizer: [
-      new TerserPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true, // Must be set to true if using source-maps in production
-      })
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin()
   ]

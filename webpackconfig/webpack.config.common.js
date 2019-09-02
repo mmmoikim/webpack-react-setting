@@ -12,8 +12,10 @@ module.exports = {
     app: [APP_DIR + '/index.js']
   },
   output: {
-    filename: '[name].bundle.js',
-    path: BUILD_DIR
+    filename: '[id].[hash].js',
+    chunkFilename: '[id].[hash].js',
+    path: BUILD_DIR,
+    publicPath: '/'
   },
   module: moduleConfig,
   resolve: {
