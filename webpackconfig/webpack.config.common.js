@@ -15,7 +15,7 @@ module.exports = {
     filename: '[id].[hash].js',
     chunkFilename: '[id].[hash].js',
     path: BUILD_DIR,
-    publicPath: '/'
+    publicPath: '/webpack-react-setting/'
   },
   module: moduleConfig,
   resolve: {
