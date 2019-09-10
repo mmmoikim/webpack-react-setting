@@ -1,0 +1,75 @@
+.Container-SuperMarket-SuperMarketTemplate__SuperMarketTemplate--3-p8i {
+  width: 768px;
+  display: flex;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+}
+
+.Container-SuperMarket-SuperMarketTemplate__SuperMarketTemplate--3-p8i h2 {
+  margin-top: 0;
+}
+
+.Container-SuperMarket-SuperMarketTemplate__SuperMarketTemplate--3-p8i>div {
+  padding: 1rem;
+  flex: 1;
+}
+
+.Container-SuperMarket-SuperMarketTemplate__SuperMarketTemplate--3-p8i .Container-SuperMarket-SuperMarketTemplate__items-wrapper--3dvUd {
+  background: #f8f9fa;
+}
+
+.Container-SuperMarket-components-ShopItem__ShopItem--EJoPv {
+  background: white;
+  border: 1px solid #495057;
+  padding: 0.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.Container-SuperMarket-components-ShopItem__ShopItem--EJoPv h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.Container-SuperMarket-components-ShopItem__ShopItem--EJoPv:hover {
+  background: #495057;
+  color: white;
+}
+
+.Container-SuperMarket-components-ShopItem__ShopItem--EJoPv+.Container-SuperMarket-components-ShopItem__ShopItem--EJoPv {
+  margin-top: 1rem;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 {
+  display: flex;
+  width: 100%;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 .Container-SuperMarket-components-BasketItem__name--1mYlT {
+  flex: 2;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 .Container-SuperMarket-components-BasketItem__price--18Ipr {
+  flex: 1;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 .Container-SuperMarket-components-BasketItem__count--1Ek2m {
+  flex: 1;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 .Container-SuperMarket-components-BasketItem__return--2bYx_ {
+  margin-left: auto;
+  color: #f06595;
+  cursor: pointer;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 .Container-SuperMarket-components-BasketItem__return--2bYx_:hover {
+  text-decoration: underline;
+}
+
+.Container-SuperMarket-components-BasketItem__BasketItem--26q58+.Container-SuperMarket-components-BasketItem__BasketItem--26q58 {
+  margin-top: 1rem;
+}
+
